@@ -56,6 +56,7 @@ void CSingleton::ComputeZonesData()
 		SumResult->zones=CrossResult->zones;
 	if(SumResult->zones<ThResult->zones)
 		SumResult->zones=ThResult->zones;
+		/*
 	if (xL)
 	{
 		if (SumResult->zones > LinearResult->zones)
@@ -71,6 +72,10 @@ void CSingleton::ComputeZonesData()
 		if (SumResult->zones > ThResult->zones)
 			SumResult->zones = ThResult->zones;
 	}
+	*/
+	if(xL) LinearResult->zones = SumResult->zones;
+	if(xC) CrossResult->zones = SumResult->zones;
+	if(xT) LinearResult->zones = ThResult->zones;
 	//if(ThResult->zones > SumResult->zones) ThResult->zones = SumResult->zones;
 	AnsiString a;
 	a.cat_printf("SumResult->zones=[%d] ", SumResult->zones);
