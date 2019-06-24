@@ -532,7 +532,7 @@ bool ThreadOnLine::OnlineCycle()
 				Collect = false;
 
 				// static const int rem_zone = 0;
-				/*
+
 				if (crossZoneCounter > rem_zone)
 				{
 					if (Singleton->LinearResult->zones)
@@ -540,7 +540,7 @@ bool ThreadOnLine::OnlineCycle()
 							crossZoneCounter - rem_zone;
 					Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
 				}
-                */
+
 				// if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
 				Finally();
 				// }
