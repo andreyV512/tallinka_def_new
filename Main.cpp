@@ -887,7 +887,7 @@ void TMainForm::ReDraw(void)
 {
 	if (!isView)
 		return;
-
+   /*
 	if (Singleton->CrossResult->zones < Singleton->ThResult->zones)
 	{
 		Singleton->ThResult->zones = Singleton->CrossResult->zones;
@@ -897,7 +897,7 @@ void TMainForm::ReDraw(void)
 	{
 		Singleton->LinearResult->zones = Singleton->CrossResult->zones;
 	}
-
+     */
 	Singleton->CrossResult->ComputeZoneData();
 	Singleton->CrossResult->PutResultOnChart();
 
