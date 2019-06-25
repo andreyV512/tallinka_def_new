@@ -775,7 +775,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			workonline = NULL;
 			SetAbleButtons(true);
 //---------------------------------------------------------------
-/*
+///*
 			int zones = Singleton->LinearResult->zones;
 			if(zones < Singleton->CrossResult->zones)
 			{
@@ -785,14 +785,61 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			{
 				 zones = Singleton->ThResult->zones;
 			}
-			if(Singleton->LinearResult->zones > 0)Singleton->LinearResult->zones = zones;
-			if(Singleton->CrossResult->zones > 0)Singleton->CrossResult->zones = zones;
-			if(Singleton->ThResult->zones > 0)Singleton->ThResult->zones = zones;
+			if(Singleton->LinearResult->zones > 0)
+			{
+				Singleton->LinearResult->zones = zones;
+				double t = 0;
+				for(int i = 0; i < zones; ++i)
+				{
+					  if(0 != Singleton->LinearResult->zone_data[i])
+					  {
+					   t = Singleton->LinearResult->zone_data[i];
+					  }
+					  else
+					  {
+					   Singleton->LinearResult->zone_data[i] = t;
+					  }
+				}
+			}
+			if(Singleton->CrossResult->zones > 0)
+			{
+				Singleton->CrossResult->zones = zones;
+				double t = 0;
+				for(int i = 0; i < zones; ++i)
+				{
+					  if(0 != Singleton->CrossResult->zone_data[i])
+					  {
+					   t = Singleton->CrossResult->zone_data[i];
+					  }
+					  else
+					  {
+					   Singleton->CrossResult->zone_data[i] = t;
+					  }
+				}
+			}
+			if(Singleton->ThResult->zones > 0)
+			{
+				Singleton->ThResult->zones = zones;
+				double t = 0;
+				for(int i = 0; i < zones; ++i)
+				{
+					  if(0 != Singleton->ThResult->zone_data[i])
+					  {
+					   t = Singleton->ThResult->zone_data[i];
+					  }
+					  else
+					  {
+					   Singleton->ThResult->zone_data[i] = t;
+					  }
+				}
+			}
 
 			Singleton->ComputeZonesData();
 			Singleton->LinearResult->PutResultOnChart();
+			Singleton->CrossResult->PutResultOnChart();
+			Singleton->ThResult->PutResultOnChart();
 			Singleton->SumResult->PutResultOnChart();
-			*/
+  //			*/
 //---------------------------------------------------------------
 			if (Msg.lParam == 1)
 			{
