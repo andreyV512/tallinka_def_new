@@ -762,6 +762,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 						(Singleton->SumResult->decision == "Брак");
 			} break;
 		case ThreadOnLine::COMPLETE:
+		{
 			{
 				AnsiString a = "Сообщение: завершение треда, код: ";
 				a += Msg.lParam;
@@ -774,23 +775,24 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			workonline = NULL;
 			SetAbleButtons(true);
 //---------------------------------------------------------------
-			int zones = LinearResult->zones;
-			if(zones < CrossResult->zones)
+/*
+			int zones = Singleton->LinearResult->zones;
+			if(zones < Singleton->CrossResult->zones)
 			{
-				 zones = CrossResult->zones;
+				 zones = Singleton->CrossResult->zones;
 			}
-			else if(zones < ThResult->zones)
+			else if(zones < Singleton->ThResult->zones)
 			{
-				 zones = ThResult->zones;
+				 zones = Singleton->ThResult->zones;
 			}
-
-			if(LinearResult->zones > 0)LinearResult->zones = zones;
-			if(CrossResult->zones > 0)CrossResult->zones = zones;
-			if(ThResult->zones > 0)ThResult->zones = zones;
+			if(Singleton->LinearResult->zones > 0)Singleton->LinearResult->zones = zones;
+			if(Singleton->CrossResult->zones > 0)Singleton->CrossResult->zones = zones;
+			if(Singleton->ThResult->zones > 0)Singleton->ThResult->zones = zones;
 
 			Singleton->ComputeZonesData();
 			Singleton->LinearResult->PutResultOnChart();
 			Singleton->SumResult->PutResultOnChart();
+			*/
 //---------------------------------------------------------------
 			if (Msg.lParam == 1)
 			{
@@ -810,6 +812,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 				TPr::pr("_return_code==false");
 				bWork->Caption = "Работа";
 				bCancelWork->Enabled = false;
+			}
 			}
 			break;
 		case ThreadOnLine::UPDATE_STATUS:
