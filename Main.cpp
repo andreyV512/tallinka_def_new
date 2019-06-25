@@ -773,6 +773,25 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			delete workonline;
 			workonline = NULL;
 			SetAbleButtons(true);
+//---------------------------------------------------------------
+			int zones = LinearResult->zones;
+			if(zones < CrossResult->zones)
+			{
+				 zones = CrossResult->zones;
+			}
+			else if(zones < ThResult->zones)
+			{
+				 zones = ThResult->zones;
+			}
+
+			if(LinearResult->zones > 0)LinearResult->zones = zones;
+			if(CrossResult->zones > 0)CrossResult->zones = zones;
+			if(ThResult->zones > 0)ThResult->zones = zones;
+
+			Singleton->ComputeZonesData();
+			Singleton->LinearResult->PutResultOnChart();
+			Singleton->SumResult->PutResultOnChart();
+//---------------------------------------------------------------
 			if (Msg.lParam == 1)
 			{
 				// --- Сохранение в БД и в файл
