@@ -205,7 +205,7 @@ private:
 	AnsiString TitleHead;
 	AnsiString Customer;
 	AnsiString User;
-
+	bool complected;
 public: // User declarations
 	   HANDLE hEvent;
 	__fastcall TMainForm(TComponent* Owner);

@@ -742,6 +742,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			break;
 		case ThreadOnLine::COMPUTE:
 		{
+		complected = true;
 			{
 				AnsiString a = "Сообщение: расчет треда, код: ";
 				a += Msg.lParam;
@@ -836,17 +837,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			delete workonline;
 			workonline = NULL;
 			SetAbleButtons(true);
-//---------------------------------------------------------------
-/*
 
-
-			Singleton->ComputeZonesData();
-			Singleton->LinearResult->PutResultOnChart();
-			Singleton->CrossResult->PutResultOnChart();
-			Singleton->ThResult->PutResultOnChart();
-			Singleton->SumResult->PutResultOnChart();
-			*/
-//---------------------------------------------------------------
 			if (Msg.lParam == 1)
 			{
 				// --- Сохранение в БД и в файл
@@ -885,7 +876,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 	else if (Msg.message == sms_msg)
 	{
 	  //	if (Singleton->CrossResult->zones >= Singleton->ThResult->zones)
-	    if(workonline != NULL)
+		if(!complected)
 		{
 			TPr::pr("Перерисовываем Thick");
 			AnsiString a;
@@ -1016,6 +1007,7 @@ void TMainForm::ReCalcSG(void)
 // ---------------------------------------------------------------------------
 void TMainForm::Start(void)
 {
+complected = false;
 	if (workonline != NULL)
 	{
 		pr("TMainForm::Start: работа уже запущена");
@@ -1077,6 +1069,7 @@ void TMainForm::InteruptSG(void)
 // ---------------------------------------------------------------------------
 void TMainForm::ReStart(void)
 {
+complected = false;
 	if (workonline == NULL)
 	{
 		pr("TMainForm::ReStart: работа не запущена");
