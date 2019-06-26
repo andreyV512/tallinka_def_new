@@ -879,6 +879,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 	else if (Msg.message == sms_msg)
 	{
 	  //	if (Singleton->CrossResult->zones >= Singleton->ThResult->zones)
+	    if(workonline != NULL)
 		{
 			TPr::pr("Перерисовываем Thick");
 			AnsiString a;
