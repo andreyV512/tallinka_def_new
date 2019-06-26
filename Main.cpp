@@ -741,42 +741,14 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			}
 			break;
 		case ThreadOnLine::COMPUTE:
+		{
 			{
 				AnsiString a = "Сообщение: расчет треда, код: ";
 				a += Msg.lParam;
 				TPr::pr(a);
 			} isView = true;
-			ReDraw();
-			FRSG1->Set(Singleton->currentSolidGroup);
-			StatusBarTop->Refresh();
-			StatusBarTop->Panels->Items[2]->Text = " ";
-			{
-				if (cbInterruptView->Checked ||
-					cbClass2->Checked && Singleton->SumResult->decision ==
-					"Класс 2" ||
-					cbBrak->Checked && Singleton->SumResult->decision ==
-					"Брак")
-					InteruptView();
-				else
-					workonline->SetCalc
-						(Singleton->SumResult->decision == "Брак");
-			} break;
-		case ThreadOnLine::COMPLETE:
-		{
-			{
-				AnsiString a = "Сообщение: завершение треда, код: ";
-				a += Msg.lParam;
-				TPr::pr(a);
-			} workonline->Terminate();
-			SLD->LatchesTerminate();
-			SLD->SetAlarm(false);
-			workonline->WaitFor();
-			delete workonline;
-			workonline = NULL;
-			SetAbleButtons(true);
-//---------------------------------------------------------------
-///*
-			int zones = Singleton->LinearResult->zones;
+
+            int zones = Singleton->LinearResult->zones;
 			if(zones < Singleton->CrossResult->zones)
 			{
 				 zones = Singleton->CrossResult->zones;
@@ -834,12 +806,46 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 				}
 			}
 
+			ReDraw();
+			FRSG1->Set(Singleton->currentSolidGroup);
+			StatusBarTop->Refresh();
+			StatusBarTop->Panels->Items[2]->Text = " ";
+			{
+				if (cbInterruptView->Checked ||
+					cbClass2->Checked && Singleton->SumResult->decision ==
+					"Класс 2" ||
+					cbBrak->Checked && Singleton->SumResult->decision ==
+					"Брак")
+					InteruptView();
+				else
+					workonline->SetCalc
+						(Singleton->SumResult->decision == "Брак");
+			}
+			}
+			break;
+		case ThreadOnLine::COMPLETE:
+		{
+			{
+				AnsiString a = "Сообщение: завершение треда, код: ";
+				a += Msg.lParam;
+				TPr::pr(a);
+			} workonline->Terminate();
+			SLD->LatchesTerminate();
+			SLD->SetAlarm(false);
+			workonline->WaitFor();
+			delete workonline;
+			workonline = NULL;
+			SetAbleButtons(true);
+//---------------------------------------------------------------
+/*
+
+
 			Singleton->ComputeZonesData();
 			Singleton->LinearResult->PutResultOnChart();
 			Singleton->CrossResult->PutResultOnChart();
 			Singleton->ThResult->PutResultOnChart();
 			Singleton->SumResult->PutResultOnChart();
-  //			*/
+			*/
 //---------------------------------------------------------------
 			if (Msg.lParam == 1)
 			{
